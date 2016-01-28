@@ -1,4 +1,4 @@
-;;; empv --- empv -*- lexical-binding: t; coding: utf-8; -*-
+;;; evid --- evid -*- lexical-binding: t; coding: utf-8; -*-
 
 ;;; Commentary:
 
@@ -8,12 +8,12 @@
 (require 'subr-x)
 (require 'seq)
 
-(cl-defun empv:open (file)
+(cl-defun evid:open (file)
   (cl-letf* ((dir (if (file-directory-p file)
                       file
                     (file-name-directory file)))
              (all-files (directory-files dir 'full)))
-    (empv:open-mpv
+    (evid:play-mpv
      (seq-filter
       (lambda (f)
         (pcase (file-name-extension f)
@@ -21,17 +21,27 @@
            t)))
       all-files))))
 
-(cl-defun empv:open-mpv (files)
+(cl-defun evid:open-single (file)
+  (evid:play-mpv `(,file)))
+
+(cl-defun evid:play-mpv (files)
   (apply #'call-process "mpv" nil nil nil
          files))
 
-(cl-defun empv (arg)
-  (empv:open arg)
+(cl-defun evid (&rest args)
+  (cl-letf ((type (car args)))
+    (pcase type
+      ("all"
+       (evid:open (cadr args)))
+      ("single"
+       (evid:open-single (cadr args)))))
   (kill-emacs 0))
 
+
+(provide 'evid)
 
 ;; Local Variables:
 ;; mode: emacs-lisp
 ;; End:
 
-;;; empv.el ends here
+;;; evid.el ends here
