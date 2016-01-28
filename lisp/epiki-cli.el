@@ -9,6 +9,7 @@
 
 (require 'cl-lib)
 (require 'ekuva)
+(require 'evid)
 
 ;; (funcall (intern "printf") "fuck")
 
