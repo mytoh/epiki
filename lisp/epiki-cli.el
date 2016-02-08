@@ -13,8 +13,6 @@
 (require 'ekuva)
 (require 'evid)
 
-;; (funcall (intern "printf") "fuck")
-
 (cl-defun main (args)
   (cl-letf ((com (car args)))
     (apply #'funcall (intern com) (cdr args))))
