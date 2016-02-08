@@ -12,6 +12,7 @@
 (require 'cl-lib)
 (require 'ekuva)
 (require 'evid)
+(require 'sf)
 
 (cl-defun main (args)
   (cl-letf ((com (car args)))
