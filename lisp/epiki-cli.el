@@ -7,6 +7,8 @@
 (add-to-list 'load-path
              (file-name-directory load-file-name))
 
+(require 'local-paths)
+
 (require 'cl-lib)
 (require 'ekuva)
 (require 'evid)
