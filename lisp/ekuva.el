@@ -31,10 +31,10 @@
                    file-name-directory
                    ekuva:remove-trailing-slash)))
     (ekuva:call-process "sxiv"
-                        "-f" "-s" "f"  "-r" dir)))
+                        "-f" "-s" "f" "-b"  "-r" dir)))
 
 (cl-defun ekuva:sxiv-open-directory (dir)
-  (ekuva:call-process "sxiv" "-f" "-s" "f" "-r" 
+  (ekuva:call-process "sxiv" "-f" "-s" "f" "-b" "-r" 
                       (thread-first dir ekuva:remove-trailing-slash)))
 
 (cl-defun ekuva:open-function-file ()
