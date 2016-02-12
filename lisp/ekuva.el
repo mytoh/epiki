@@ -19,12 +19,12 @@
 
 (cl-defun ekuva:feh-open-file (file)
   (cl-letf ((dir (file-name-directory file)))
-    (call-process
-     "feh" nil nil nil "-Z" "-F" "-B black" dir)))
+    (ekuva:call-process
+     "feh" "-Z" "-F" "-B black" dir)))
 
 (cl-defun ekuva:feh-open-directory (dir)
-  (call-process
-   "feh" nil nil nil "-Z" "-F" "-B black" dir))
+  (ekuva:call-process
+   "feh" "-Z" "-F" "-B black" dir))
 
 (cl-defun ekuva:sxiv-open-file (file)
   (cl-letf ((dir (thread-first file
