@@ -31,6 +31,21 @@
     ((guard (executable-find "feh"))
      #'ekuva:feh-open)))
 
+(cl-defun ekuva:file-name-relative-p (file)
+  (cl-equalp (seq-elt file 0)
+             ?\.))
+
+(cl-defun ekuva:find-directory (file)
+  (pcase file
+    ((pred file-name-absolute-p)
+     (file-name-directory file))
+    ((pred ekuva:file-name-relative-p)
+     (file-name-directory file))
+    (_
+     (thread-first file
+       (expand-file-name default-directory)
+       file-name-directory))))
+
 (cl-defun ekuva:open (file)
   (pcase file
     ((pred file-regular-p)
