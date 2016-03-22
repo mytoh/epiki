@@ -7,12 +7,17 @@
 (add-to-list 'load-path
              (file-name-directory load-file-name))
 
-(require 'local-paths)
+(require 'herd)
+(herd:setup (expand-file-name "../vendor"
+                              (file-name-directory load-file-name)))
 
 (require 'cl-lib)
 (require 'ekuva)
 (require 'evid)
+(require 'ulinks)
 (require 'sf)
+(require 'script)
+(require 'etard)
 
 (cl-defun main (args)
   (cl-letf ((com (car args)))

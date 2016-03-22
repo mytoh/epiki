@@ -24,12 +24,21 @@
 (cl-defun ekuva:sxiv-open (dir)
   (ekuva:call-process "sxiv" "-f" "-s" "f" "-b" "-r" dir))
 
+(cl-defun ekuva:pqiv-open (dir)
+  (ekuva:call-process "pqiv"
+                      "--fullscreen"
+                      "--scale-images-up"
+                      "--hide-info-box"))
+
+
 (cl-defun ekuva:open-function ()
   (pcase t
     ((guard (executable-find "sxiv"))
      #'ekuva:sxiv-open)
     ((guard (executable-find "feh"))
-     #'ekuva:feh-open)))
+     #'ekuva:feh-open)
+    ((guard (executable-find "pqiv"))
+     #'ekuva:pqiv-open)))
 
 (cl-defun ekuva:file-name-relative-p (file)
   (cl-equalp (seq-elt file 0)

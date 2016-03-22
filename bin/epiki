@@ -4,4 +4,4 @@ SCRIPT_DIR="$(dirname $(readlink -f  $0))"
 PROJECT_DIR="$(readlink -f ${SCRIPT_DIR}/..)"
 LISP_DIR="${PROJECT_DIR}/lisp"
 
-emacs  --script ${LISP_DIR}/epiki-cli.el -- ${@}
+emacs --script ${LISP_DIR}/epiki-cli.el -- ${@}
