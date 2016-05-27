@@ -25,7 +25,17 @@
           (clry:paint :default inf)))
 
 (cl-defun sf (&rest args)
-  (princ (sf:make-info "OS" (sf:os)))
+  (colle:each 
+   #'princ
+   `[,(sf:make-info "OS" (sf:os))
+      ,(sf:make-info "Uptime" (sf:os))
+      ,(sf:make-info "Shell" (sf:os))
+      ,(sf:make-info "WM" (sf:os))
+      ,(sf:make-info "Font" (sf:os))
+      ,(sf:make-info "Resolution" (sf:os))
+      ,(sf:make-info "Color Scheme" (sf:os))
+      ]
+   )
   (kill-emacs 0))
 
 
