@@ -4,10 +4,8 @@
 
 ;;; Code:
 
-(cl-defun etard (args)
+(cl-defun -main (args)
   (printc args))
 
-
-(provide 'etard)
 
 ;;; etard.el ends here

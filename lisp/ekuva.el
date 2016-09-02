@@ -63,10 +63,9 @@
     ((pred file-directory-p)
      (funcall (ekuva:open-function) file))))
 
-(cl-defun ekuva (args)
+(cl-defun -main (args)
   (ekuva:open (expand-file-name args))
   (kill-emacs 0))
 
-(provide 'ekuva)
 
 ;;; ekuva.el ends here

@@ -24,7 +24,7 @@
           (clry:reset)
           (clry:paint :default inf)))
 
-(cl-defun sf (&rest args)
+(cl-defun -main (&rest args)
   (colle:each 
    #'princ
    `[,(sf:make-info "OS" (sf:os))
@@ -33,12 +33,7 @@
       ,(sf:make-info "WM" (sf:os))
       ,(sf:make-info "Font" (sf:os))
       ,(sf:make-info "Resolution" (sf:os))
-      ,(sf:make-info "Color Scheme" (sf:os))
-      ]
-   )
+      ,(sf:make-info "Color Scheme" (sf:os))])
   (kill-emacs 0))
-
-
-(provide 'sf)
 
 ;;; sf.el ends here

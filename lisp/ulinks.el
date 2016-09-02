@@ -9,7 +9,7 @@
 (require 'dom)
 (require 'xml)
 
-(cl-defun ulinks (url)
+(cl-defun -main (url)
   (thread-first (with-current-buffer
           (url-retrieve-synchronously
            url)

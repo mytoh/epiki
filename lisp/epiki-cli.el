@@ -12,17 +12,20 @@
                               (file-name-directory load-file-name)))
 
 (require 'cl-lib)
-(require 'ekuva)
-(require 'evid)
-(require 'ulinks)
-(require 'sf)
-(require 'script)
-(require 'etard)
 
-(cl-defun main (args)
-  (cl-letf ((com (car args)))
-    (apply #'funcall (intern com) (cdr args))))
+(cl-defun epiki-load (name)
+  (load (expand-file-name
+         name
+         (file-name-directory load-file-name))
+        (not 'noerror)
+        'nomessage))
 
-(main (cdr argv))
+(cl-defun run (args)
+  (cl-letf ((name (car args)))
+    (epiki-load name))
+  (apply #'-main (cdr args)))
+
+(run (cdr argv))
+
 
 ;;; epiki-cli.el ends here

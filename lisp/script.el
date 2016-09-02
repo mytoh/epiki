@@ -7,12 +7,10 @@
                                 ,mag)))
 
 
-(cl-defun script (&rest args)
+(cl-defun -main (&rest args)
   (cl-letf ((com (car args)))
     (pcase com
       ("mag2tore"
-       (script:mag2tore (cadr args)))
-      ))
+       (script:mag2tore (cadr args)))))
   (kill-emacs 0))
 
-(provide 'script)

@@ -28,7 +28,7 @@
   (apply #'call-process "mpv" nil nil nil
          files))
 
-(cl-defun evid (&rest args)
+(cl-defun -main (&rest args)
   (cl-letf ((type (car args)))
     (pcase type
       ("all"
@@ -37,8 +37,6 @@
        (evid:open-single (cadr args)))))
   (kill-emacs 0))
 
-
-(provide 'evid)
 
 ;; Local Variables:
 ;; mode: emacs-lisp
