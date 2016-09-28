@@ -4,8 +4,8 @@
 
 ;;; Code:
 
-(req 'pcase)
-(req 'cl-lib)
+(require 'pcase)
+(require 'cl-lib)
 
 (add-to-list 'load-path
              (file-name-directory load-file-name))
