@@ -27,13 +27,16 @@
 (cl-defun -main (&rest args)
   (colle:each 
    #'princ
-   `[,(sf:make-info "OS" (sf:os))
-      ,(sf:make-info "Uptime" (sf:os))
-      ,(sf:make-info "Shell" (sf:os))
-      ,(sf:make-info "WM" (sf:os))
-      ,(sf:make-info "Font" (sf:os))
-      ,(sf:make-info "Resolution" (sf:os))
-      ,(sf:make-info "Color Scheme" (sf:os))])
+   `[,(sf:make-info "os" (sf:os))
+     ,(sf:make-info "uptime" (sf:os))
+     ,(sf:make-info "shell" (sf:os))
+     ,(sf:make-info "packages")     
+     ,(sf:make-info "wM" (sf:os))
+     ,(sf:make-info "font" (sf:os))
+     ,(sf:make-info "resolution" (sf:os))
+     ,(sf:make-info "cpu" (sf:os))
+     ,(sf:make-info "memory" (sf:os))
+     ,(sf:make-info "colorscheme" (sf:os))])
   (kill-emacs 0))
 
 ;;; sf.el ends here
