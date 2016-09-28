@@ -10,13 +10,20 @@
 
 (require 'clry)
 
-(cl-defun sf:command-uname ()
-  (thread-first "uname"
+(cl-defun sf:wrap-command (cmd)
+  (thread-first cmd
     shell-command-to-string
     string-trim))
 
 (cl-defun sf:os ()
-  (sf:command-uname))
+  (sf:wrap-command "uname"))
+
+(cl-defun sf:uptime ()
+  (pcase-let* ((`(,i1 ,i2 . ,_) (thread-first (sf:wrap-command "uptime")
+                                  (split-string "," )))
+               (`(,_ ,_ . ,u1) (split-string i1)))
+    (concat (apply #'concat u1)
+            i2)))
 
 (cl-defun sf:make-info (name inf)
   (format "%s%s: %s\n"
@@ -24,19 +31,22 @@
           (clry:reset)
           (clry:paint :default inf)))
 
+
 (cl-defun -main (&rest args)
-  (colle:each 
-   #'princ
-   `[,(sf:make-info "os" (sf:os))
-     ,(sf:make-info "uptime" (sf:os))
-     ,(sf:make-info "shell" (sf:os))
-     ,(sf:make-info "packages" (sf:os))     
-     ,(sf:make-info "wM" (sf:os))
-     ,(sf:make-info "font" (sf:os))
-     ,(sf:make-info "resolution" (sf:os))
-     ,(sf:make-info "cpu" (sf:os))
-     ,(sf:make-info "memory" (sf:os))
-     ,(sf:make-info "colorscheme" (sf:os))])
+  (cl-letf ((os (sf:os))
+            (up (sf:uptime)))
+    (colle:each 
+     #'princ
+     `[,(sf:make-info "os" os)
+       ,(sf:make-info "uptime" up)
+       ,(sf:make-info "shell" os)
+       ,(sf:make-info "packages" os)     
+       ,(sf:make-info "wM" os)
+       ,(sf:make-info "font" os)
+       ,(sf:make-info "resolution" os)
+       ,(sf:make-info "cpu" os)
+       ,(sf:make-info "memory" os)
+       ,(sf:make-info "colorscheme" os)]))
   (kill-emacs 0))
 
 ;;; sf.el ends here
