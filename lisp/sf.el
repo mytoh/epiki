@@ -30,7 +30,7 @@
    `[,(sf:make-info "os" (sf:os))
      ,(sf:make-info "uptime" (sf:os))
      ,(sf:make-info "shell" (sf:os))
-     ,(sf:make-info "packages")     
+     ,(sf:make-info "packages" (sf:os))     
      ,(sf:make-info "wM" (sf:os))
      ,(sf:make-info "font" (sf:os))
      ,(sf:make-info "resolution" (sf:os))
