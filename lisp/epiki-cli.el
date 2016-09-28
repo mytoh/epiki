@@ -4,14 +4,15 @@
 
 ;;; Code:
 
+(req 'pcase)
+(req 'cl-lib)
+
 (add-to-list 'load-path
              (file-name-directory load-file-name))
 
 (require 'herd)
 (herd:setup (expand-file-name "../vendor"
                               (file-name-directory load-file-name)))
-
-(require 'cl-lib)
 
 (cl-defun epiki-load (name)
   (load (expand-file-name
@@ -21,11 +22,12 @@
         'nomessage))
 
 (cl-defun run (args)
-  (cl-letf ((name (car args)))
-    (epiki-load name))
-  (apply #'-main (cdr args)))
+  (pcase-let ((`(,name . ,rargs) args))
+    (epiki-load name)
+    (apply #'-main rargs)))
 
-(run (cdr argv))
+(progn
+  (run (cdr argv)))
 
 
 ;;; epiki-cli.el ends here
